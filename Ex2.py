@@ -36,7 +36,7 @@ def plot(t: np.linspace, beta, gamma, S0, I0, R0, N):
     g.xaxis.set_tick_params(length=0)
     g.grid(b=True, which='major', c='w', lw=2, ls='solid')
     l = g.legend()
-    legend.get_frame().set_alpha(0.5)
+    l.get_frame().set_alpha(0.5)
     for spine in ('top', 'right', 'bottom', 'left'):
         g.spines[spine].set_visible(False)
     plt.title("SIR model", size=20)

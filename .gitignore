@@ -125,3 +125,5 @@ dmypy.json
 .pyre/
 # Vscode folder
 .vscode/
+# Idea folder
+.idea/
