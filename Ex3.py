@@ -14,12 +14,8 @@ while i<size-1:
      bs = abs(np.random.normal(0, 0.1))
      gs = abs(np.random.normal(0, 0.1))
      q = np.random.uniform(0,1)
-
-     if (bs*gs)/(b0*b0)==(b0*g0)/(bs*gs):
-          r = min(1,(bs*gs)/(b0*g0))
-     else:
-          #r = min(1,)
-          r = 1
+     
+     r = min(1,(bs*gs)/(b0*g0))
      if (q<r):
           lb.append(bs)
           lg.append(gs)
@@ -42,3 +38,4 @@ for spine in ('top', 'right', 'bottom', 'left'):
      g.spines[spine].set_visible(False)
 plt.title("Beta and Gamma values", size=20)
 plt.show()
+
