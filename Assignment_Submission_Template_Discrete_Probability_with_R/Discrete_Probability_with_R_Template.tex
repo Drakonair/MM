@@ -135,7 +135,7 @@ KHOA KHOA HỌC - KỸ THUẬT MÁY TÍNH
 ~~\\
 \hline
 \\
-\multicolumn{1}{l}{\textbf{{\Large Nhóm: ... ---- Bài tập lớn}}}\\
+\multicolumn{1}{l}{\textbf{{\Large \null \qquad \qquad \qquad \quad Bài tập lớn}}}\\
 \\
 \textbf{{\Huge Mô hình SIR}} \\
 \textbf{{\Huge trong dự báo COVID-19}}\\
@@ -299,8 +299,8 @@ Sau đây là đồ thị biểu diễn mô hình SIR với các biến đầu v
 \includegraphics[scale=0.8]{Images/Figure_2.png}
 \end{center}
 \subsection{Bài toán 4}
-Chúng ta sẽ lấy dữ liệu của khu vực Mỹ để ước lượng giá trị $R_0$. Thư viện pandas của python sẽ giúp ta lấy dữ liệu từ \url(https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/archived_data/archived_time_series/time_series_19-covid-Recovered_archived_0325.csv) và \url(https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/archived_data/archived_time_series/time_series_19-covid-Confirmed_archived_0325.csv)
-	
+Chúng ta sẽ lấy dữ liệu của khu vực Mỹ để ước lượng giá trị $R_0$. Thư viện pandas của python sẽ giúp ta lấy dữ liệu từ \url{https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/archived_data/archived_time_series/time_series_19-covid-Confirmed_archived_0325.csv} và \url{https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/archived_data/archived_time_series/time_series_19-covid-Confirmed_archived_0325.csv}. \\
+Các dữ liệu Infected và Recovered của từng ngày sẽ được lưu vào hai mảng lI và LR tương ứng. Sử dụng công thức $(20)$ trong đề bài cùng với số lượng mẫu $\beta$ và $\gamma$ là 100, chúng ta tính các giá trị $R_0$ từ ngày $22/01/20$ đến $23/03/20$ của nước Mỹ. Do trong khoảng thời gian dịch chưa bùng phát mạnh nên các giá trị $\pi(X|\beta,\gamma)$ vô định.
 
 \section{Kết luận}
 	...
