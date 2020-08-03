@@ -42,4 +42,4 @@ def plot(t: np.linspace, beta, gamma, S0, I0, R0, N):
     plt.show()
 
 #Example
-plot(np.linspace(0,8,8),2,0.5,800,7,0,1000)
+plot(np.linspace(0,8,9),2,0.5,800,7,0,807)

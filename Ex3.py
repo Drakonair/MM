@@ -6,15 +6,13 @@ from scipy.stats import gamma
 lb, lg = [], []
 size = 100
 i = 0
-b0 = abs(np.random.normal(0, 0.1))
-g0 = abs(np.random.normal(0, 0.1))
+b0, g0 = abs(np.random.normal(0, 0.3, 2))
 lb.append(b0)
 lg.append(g0)
 while i<size-1:
-     bs = abs(np.random.normal(0, 0.1))
-     gs = abs(np.random.normal(0, 0.1))
+     bs, gs = abs(np.random.normal(0, 0.3, 2))
      q = np.random.uniform(0,1)
-     
+
      r = min(1,(bs*gs)/(b0*g0))
      if (q<r):
           lb.append(bs)
@@ -38,4 +36,3 @@ for spine in ('top', 'right', 'bottom', 'left'):
      g.spines[spine].set_visible(False)
 plt.title("Beta and Gamma values", size=20)
 plt.show()
-

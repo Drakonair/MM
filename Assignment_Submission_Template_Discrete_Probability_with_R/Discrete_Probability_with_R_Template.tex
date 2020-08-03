@@ -149,7 +149,7 @@ KHOA KHOA HỌC - KỸ THUẬT MÁY TÍNH
 \begin{table}[h]
 \begin{tabular}{rrl}
 \hspace{5 cm} & GVHD: & Nguyễn An Khương\\
-\hspace{5 cm} &  & Huỳnh Tường Nguyên\\
+\hspace{5 cm} &  & Nguyễn Tiến Thịnh\\
 & SV thực hiện: & Đỗ Minh Tâm -- 1813913 \\
 & & Lê Thanh Tân -- 1813935\\
 
@@ -189,7 +189,7 @@ và có biện pháp kịp thời trước các đợt bùng phát dịch bệnh
 \subsection{Mô hình SIR}
 
 \subsubsection{Phát biểu mô hình}
-Mô hình SIR (Suspectible - Infectious - Recovered) là một trong các mô hình cách ly cơ bản được sử dụng nhiều nhất trong quá khứ và hiện tại để mô tả dịch bệnh. Mô hình được lần đầu
+Mô hình SIR (Susceptible - Infectious - Recovered) là một trong các mô hình cách ly cơ bản được sử dụng nhiều nhất trong quá khứ và hiện tại để mô tả dịch bệnh. Mô hình được lần đầu
 phát biểu vào thế kỷ 20 (xem [KM27]). Mô hình thể hiện ba trạng thái (Có nguy cơ mắc bệnh -
 Mắc bệnh - Hồi phục) cho một nhóm người được cách ly với giả thiết rằng sẽ miễn dịch với bệnh
 nếu đã phục hồi. Mô hình SIR là một hệ động lực gồm ba phương trình vi phân sau
@@ -280,14 +280,27 @@ Trong khuôn khổ của bài tập lớn này, ta sẽ sử dụng dữ liệu 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Đề bài}\label{bai_tap}
-	\subsection{Bài toán 1}  
-	...
-	\subsection{Bài toán 2}	
-	...
-	\subsection{Bài toán 3}
-	 ...
-	\subsection{Bài toán 4}
-	 ...
+\subsection{Bài toán 2}  
+Để tìm nghiệm cho hệ SIR bằng thuật toán Euler, ta sử dụng hàm odeint từ thư viện scipy của ngôn ngữ Python.\\
+ \textbf{\quad def  SIR(t: np.linspace, beta, gamma, S0, I0, R0, N): \\}
+\null \qquad \qquad y0 = S0, I0, R0 \\ 
+\null \qquad \qquad ret = odeint(func, y0, t, args=(N, beta, gamma)) \\ 
+\null \qquad \qquad S, I, R = ret.T \\ 
+\null \qquad \qquad return S,I,R \\
+Hàm odeint sử dụng các phương trình vi phân của mô hình SIR cơ bản để tìm các giá trị S, I, R trên một khoảng thời gian với bước nhảy nhất định.
+Sau đây là đồ thị biểu diễn mô hình SIR với các biến đầu vào là $\beta=2, \gamma=0.5, S0=800, I0=0, R0=7$
+\begin{center}
+\includegraphics[scale=0.8]{Images/Figure_1.png}
+\end{center}
+
+\subsection{Bài toán 3}	
+Để tìm ra các giá trị $\beta$ và $\gamma$, ta bắt đầu ước lượng $\beta_0$ và $\gamma_0$ bằng giá trị dương của phân phối chuẩn với trung bình là 0 và độ lệch chuẩn 0.3. Giả sử chúng ta tính  100 cặp giá trị $\beta$ và $\gamma$. Ta sử dụng phương pháp Metropolis-Hastings để tính các giá trị này và được đồ thị sau.
+\begin{center}
+\includegraphics[scale=0.8]{Images/Figure_2.png}
+\end{center}
+\subsection{Bài toán 4}
+Chúng ta sẽ lấy dữ liệu của khu vực Mỹ để ước lượng giá trị $R_0$. Thư viện pandas của python sẽ giúp ta lấy dữ liệu từ \url(https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/archived_data/archived_time_series/time_series_19-covid-Recovered_archived_0325.csv) và \url(https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/archived_data/archived_time_series/time_series_19-covid-Confirmed_archived_0325.csv)
+	
 
 \section{Kết luận}
 	...

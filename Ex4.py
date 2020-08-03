@@ -5,6 +5,10 @@ import Ex3
 from math import exp
 from scipy.special import gamma
 
+SUB = str.maketrans("0123456789", "₀₁₂₃₄₅₆₇₈₉")
+SUP = str.maketrans("0123456789", "⁰¹²³⁴⁵⁶⁷⁸⁹")
+a = "R0".translate(SUB)
+Sval = []
 lI = {}
 lR = {}
 df = pd.read_csv('https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/archived_data/archived_time_series/time_series_19-covid-Confirmed_archived_0325.csv')
@@ -28,5 +32,14 @@ for x in range(len(Ex3.lb)):
      b,g = Ex3.lb[x], Ex3.lg[x]
      for i in c:
           X = lI[i]+lR[i]
-          S = (g**b)*X**(b-1)*exp((-1)*g*X)/gamma(b)
-          print(S)
+     S = (g**b)*X**(b-1)*exp((-1)*g*X)/gamma(b)
+     Sval.append(S)
+sum = 0
+count = 0
+print(Sval)
+for x in Sval:
+     if x!=float('inf'):
+          sum+=x
+          count+=1
+print(sum/count)
+
