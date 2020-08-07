@@ -280,6 +280,75 @@ Trong khuôn khổ của bài tập lớn này, ta sẽ sử dụng dữ liệu 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Đề bài}\label{bai_tap}
+\subsection{Bài toán 1}
+Để bài: Trình bày lại chi tiết cách xây dựng mô hình SIR (cả trường hợp rời rạc lẫn liên tục) hoặc mở rộng của nó và những vấn đề liên quan.
+\\
+Mô hình SIR biểu diễn cho dịch bệnh COVID-19 bắt đầu từ thành phố Vũ Hán(Wuhan). 
+Giả sử:
+\begin{itemize}
+ \item Cộng đồng này được cách ly, không ai có thể ra vào.
+ \item Mỗi người được chia thành có thể bị nhiễm(S), đã bị nhiễm(I) và số người không còn nhiễm bệnh(R tính cả số người đã mất).
+ \item Lúc bắt đầu mọi người đều được cho là S hoặc I, R = 0.
+ \item Một người đã mắc bệnh và hồi phục thì cơ thể sẽ có kháng thể nên sẽ không bị mắc bệnh lần nữa.
+ \item Thời gian trung bình một người hồi phục sau khi mắc bệnh là 2 tuần.
+ \item Đơn vị thời gian chúng ta tính là tuần.
+\end{itemize}
+\subsubsection{Mô hình SIR rời rạc}
+Chúng ta sẽ bắt đầu mô hình hóa bằng R(t). Khoảng thời gian mà môt người mắc bệnh là 2 tuần. Nên sau mỗi tuần số người không còn nhiễm nữa là 50%.
+\begin{equation}
+R(t+1) = R(t) + 0.5I(t)
+\end{equation}
+Tỉ lệ 0.5 trên được gọi là tỉ lệ người không còn nhiễm bệnh sau mỗi tuần $\beta$.
+I(t) sẽ có cả biểu thức tăng và giảm sau một khoảng thời gian. Nó được giảm dựa trên số người không nhiễm bệnh sau mỗi tuần: 0.5I(t). Và được tăng lên bởi số người có thể nhiễm bệnh(S) tiếp xúc với số người đã nhiễm bệnh(I).: $\alpha$S(t)I(t). Ta định nghĩa $\alpha$ là tốc độ người nhiễm bệnh. Ta coi như $\alpha$ là 1 hằng số có thể tìm được từ những ca nhiễm đầu tiên.
+\\
+Ví dụ: Chúng ta có 1 khu dân cư gồm 2000 người, ban đầu có 10 người nhiễm bệnh: I(0) = 10 và S(0) = 1990. Sau 1 tuần tổng số người bị nhiễm bệnh là 20. Ta tính $alpha$ như sau:
+\begin{equation}
+\begin{split}
+I(0) &= 10 \\
+I(1) &= I(0) - 0.5*I(0) + \alpha *I(0)*S(0) \\
+20 &= 10 - 5 + \alpha *10*1990 \\
+15 &= 19900*\alpha \\
+\alpha &= 0.00075376884 \\
+\end{split}
+\end{equation}
+\\
+Ta xét S(t). Con số này sẽ giảm dần theo thời gian khi những người có thể nhiễm bệnh bị nhiễm
+\begin{equation}
+S(t+1) = S(t) - \alpha S(n)I(n)
+\end{equation}
+
+Từ đó ta rút ra được mô hình:
+\begin{equation}
+\begin{split}
+R(t+1) &= R(t) + 0.5I(t) \\
+I(t+1) &= I(t) - 0.5I(t) + 0.00075376884I(t)S(t) \\
+S(t+1) &= S(t) - 0.00075376884S(t)I(T) \\
+I(0) &= 10, S(0) = 1990, R(0) = 0
+\end{split}
+\end{equation}
+\subsubsection{Mô hình SIR liên tục}
+Chúng ta sẽ bắt đầu mô hình hóa bằng R(t). Khoảng thời gian mà môt người mắc bệnh là 2 tuần. Nên sau mỗi tuần số người không còn nhiễm nữa là 50%.
+\begin{equation}
+\frac{dR}{dt} = 0.5*I(t)
+\end{equation}
+Tỉ lệ 0.5 trên được gọi là tỉ lệ người không còn nhiễm bệnh sau mỗi tuần $\beta$.
+I(t) sẽ có cả biểu thức tăng và giảm sau một khoảng thời gian. Nó được giảm dựa trên số người không nhiễm bệnh sau mỗi tuần: 0.5I(t). Và được tăng lên bởi số người có thể nhiễm bệnh(S) tiếp xúc với số người đã nhiễm bệnh(I).: $\alpha$S(t)I(t). Ta định nghĩa $\alpha$ là tốc độ người nhiễm bệnh. Ta coi như $\alpha$ là 1 hằng số có thể tìm được từ những ca nhiễm đầu tiên. Ta sẽ ước lượng $\alpha$ là: 0.00075376884
+\\
+Ta xét S(t). Con số này sẽ giảm dần theo thời gian khi những người có thể nhiễm bệnh bị nhiễm. Ta sẽ dùng tỉ lệ $\alpha$ để dựng mô hình
+\begin{equation}
+\frac{dS}{dt} = -0.00075376884*S(t)*I(t)
+\end{equation}
+Từ đó ta suy ra được mô hình SIR sau:
+\begin{equation}
+\begin{split}
+&\frac{dR}{dt} = 0.5I(t) \\
+&\frac{dI}{dt} = -0.5I(t) + 0.00075376884S(t)I(t) \\
+&\frac{dS}{dt} = 0.00075376884S(t)I(t) \\
+&I(0) = 10, S(0) = 1990, R(0) = 0
+\end{split}
+\end{equation} 
+
+
 \subsection{Bài toán 2}  
 Để tìm nghiệm cho hệ SIR bằng thuật toán Euler, ta sử dụng hàm odeint từ thư viện scipy của ngôn ngữ Python.\\
  \textbf{\quad def  SIR(t: np.linspace, beta, gamma, S0, I0, R0, N): \\}
@@ -303,7 +372,7 @@ Chúng ta sẽ lấy dữ liệu của khu vực Mỹ để ước lượng giá
 Các dữ liệu Infected và Recovered của từng ngày sẽ được lưu vào hai mảng lI và LR tương ứng. Sử dụng công thức $(20)$ trong đề bài cùng với số lượng mẫu $\beta$ và $\gamma$ là 100, chúng ta tính các giá trị $R_0$ từ ngày $22/01/20$ đến $23/03/20$ của nước Mỹ. Do trong khoảng thời gian dịch chưa bùng phát mạnh nên các giá trị $\pi(X|\beta,\gamma)$ vô định.
 
 \section{Kết luận}
-	...
+Trong báo cáo này, nhóm đã trình bày cách xây dựng mô hình SIR của dịch bệnh COVID-19 và mô hình được đưa ra để tiên đoán và có biện pháp kịp thời trước các đợt bùng phát dịch bệnh nghiêm trọng có thể xảy ra.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -316,6 +385,8 @@ Các dữ liệu Infected và Recovered của từng ngày sẽ được lưu v�
 
 \bibitem[Ker]{Ker}{Kerns, G. J.}
 {\em Introduction to Probability and Statistics Using R,} 2nd ed., CRC 2015.
+
+%\bibitem[GFH13] {\em Frank Giordano, William P Fox, and Steven Horton. A first course in mathematical modeling. Nelson Education, 2013.}
 
 \end{thebibliography}
 \end{document}
