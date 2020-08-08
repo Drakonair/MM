@@ -3,8 +3,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.stats import gamma
 
-lb, lg = [], []
-size = 100
+lb, lg = [], [] #beta and gamma arrays
+size = 100 #sample size
+
+#Metrpolis-Hastings
 i = 0
 b0, g0 = abs(np.random.normal(0, 0.3, 2))
 lb.append(b0)
@@ -12,7 +14,6 @@ lg.append(g0)
 while i<size-1:
      bs, gs = abs(np.random.normal(0, 0.3, 2))
      q = np.random.uniform(0,1)
-
      r = min(1,(bs*gs)/(b0*g0))
      if (q<r):
           lb.append(bs)
@@ -21,6 +22,8 @@ while i<size-1:
           lb.append(b0)
           lg.append(g0)
      i += 1
+
+#PLotting the diagram
 fig = plt.figure(facecolor='w')
 g = fig.add_subplot(111, facecolor='#e0fbfc', axisbelow=True)
 g.plot(np.linspace(0,size,size), lb, 'c', lw=2, label='Beta')
